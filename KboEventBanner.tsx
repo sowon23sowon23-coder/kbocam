@@ -97,7 +97,7 @@ export default function KboEventBanner() {
       unlock?: () => void;
     };
 
-    orientation.lock?.("landscape").catch(() => {});
+    orientation.lock?.("portrait").catch(() => {});
     return () => orientation.unlock?.();
   }, []);
 
@@ -219,8 +219,8 @@ export default function KboEventBanner() {
 
     const totalW = containerRef.current.offsetWidth;
     const totalH = containerRef.current.offsetHeight;
-    const leftW = leftPanelRef.current.offsetWidth;
-    const rightW = totalW - leftW;
+    const topH = leftPanelRef.current.offsetHeight;
+    const bottomH = totalH - topH;
     const scale = 2;
 
     const out = document.createElement("canvas");
@@ -231,16 +231,16 @@ export default function KboEventBanner() {
     if (!ctx) return;
     ctx.scale(scale, scale);
 
-    const grad = ctx.createLinearGradient(0, 0, 0, totalH);
+    const grad = ctx.createLinearGradient(0, 0, 0, topH);
     grad.addColorStop(0, "#87CEEB");
     grad.addColorStop(0.6, "#B8E6FF");
     grad.addColorStop(1, "#C8EBFF");
     ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, leftW, totalH);
+    ctx.fillRect(0, 0, totalW, topH);
 
     await document.fonts.ready;
     const pad = 14;
-    const titleSize = Math.min(38, leftW * 0.19);
+    const titleSize = Math.min(38, totalW * 0.12, topH * 0.22);
     ctx.font = `900 ${titleSize}px "Noto Sans KR", "Apple SD Gothic Neo", sans-serif`;
     ctx.fillStyle = "#2D7A2D";
     ctx.fillText("컬러즈", pad, pad + titleSize);
@@ -265,14 +265,14 @@ export default function KboEventBanner() {
 
     try {
       const player = await loadImage("/baseball-player.png");
-      const imageH = Math.min(totalH * 0.65, leftW * 1.1);
+      const imageH = Math.min(topH * 0.72, totalW * 0.52);
       const imageW = (player.width / player.height) * imageH;
-      ctx.drawImage(player, (leftW - imageW) / 2, totalH - imageH, imageW, imageH);
+      ctx.drawImage(player, totalW - imageW - pad, topH - imageH, imageW, imageH);
     } catch {}
 
     const cam = await loadImage(capturedImage);
     const srcAR = cam.width / cam.height;
-    const dstAR = rightW / totalH;
+    const dstAR = totalW / bottomH;
     let sx = 0;
     let sy = 0;
     let sw = cam.width;
@@ -286,7 +286,7 @@ export default function KboEventBanner() {
       sy = (cam.height - sh) / 2;
     }
 
-    ctx.drawImage(cam, sx, sy, sw, sh, leftW, 0, rightW, totalH);
+    ctx.drawImage(cam, sx, sy, sw, sh, 0, topH, totalW, bottomH);
 
     const link = document.createElement("a");
     link.href = out.toDataURL("image/png");
@@ -301,7 +301,7 @@ export default function KboEventBanner() {
         width: "100%",
         height: "100dvh",
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
         background: "#000",
         fontFamily: "'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif",
         overflow: "hidden",
@@ -311,7 +311,7 @@ export default function KboEventBanner() {
         paddingLeft: "env(safe-area-inset-left)",
       }}
     >
-      {isPortrait && (
+      {!isPortrait && (
         <div
           style={{
             position: "absolute",
@@ -330,9 +330,9 @@ export default function KboEventBanner() {
           }}
         >
           <div style={{ fontSize: "56px", lineHeight: 1 }}>Rotate</div>
-          <div style={{ fontSize: "clamp(22px, 5vw, 30px)", fontWeight: 900 }}>Use in landscape mode</div>
+          <div style={{ fontSize: "clamp(22px, 5vw, 30px)", fontWeight: 900 }}>Use in portrait mode</div>
           <div style={{ fontSize: "clamp(13px, 3vw, 16px)", color: "rgba(255,255,255,0.78)" }}>
-            This mobile camera flow is optimized for a horizontal screen.
+            This mobile camera flow is optimized for a vertical screen.
           </div>
         </div>
       )}
@@ -340,9 +340,11 @@ export default function KboEventBanner() {
       <div
         ref={leftPanelRef}
         style={{
-          width: "40%",
-          maxWidth: "320px",
-          height: "100%",
+          width: "100%",
+          maxWidth: "none",
+          height: "32%",
+          minHeight: "220px",
+          maxHeight: "280px",
           background: "linear-gradient(180deg, #87CEEB 0%, #B8E6FF 60%, #C8EBFF 100%)",
           display: "flex",
           flexDirection: "column",
