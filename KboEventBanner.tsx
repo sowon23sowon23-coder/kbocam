@@ -229,6 +229,7 @@ export default function KboEventBanner() {
       {/* ── 오른쪽: 카메라가 전체를 채움 ── */}
       <div ref={cameraAreaRef} style={{
         flex: 1, position: "relative", overflow: "hidden", background: "#000",
+        boxShadow: "inset 0 0 0 10px #87CEEB",
       }}>
 
         {/* 카메라 에러 */}
