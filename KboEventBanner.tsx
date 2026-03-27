@@ -25,6 +25,29 @@ const loadImage = (src: string): Promise<HTMLImageElement> =>
     img.src = src;
   });
 
+const fillRoundedRect = (
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  radius: number,
+) => {
+  const r = Math.min(radius, width / 2, height / 2);
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + width - r, y);
+  ctx.arcTo(x + width, y, x + width, y + r, r);
+  ctx.lineTo(x + width, y + height - r);
+  ctx.arcTo(x + width, y + height, x + width - r, y + height, r);
+  ctx.lineTo(x + r, y + height);
+  ctx.arcTo(x, y + height, x, y + height - r, r);
+  ctx.lineTo(x, y + r);
+  ctx.arcTo(x, y, x + r, y, r);
+  ctx.closePath();
+  ctx.fill();
+};
+
 const iconBtn: React.CSSProperties = {
   width: "clamp(44px, 11vw, 56px)",
   height: "clamp(44px, 11vw, 56px)",
@@ -217,19 +240,22 @@ export default function KboEventBanner() {
   const download = useCallback(async () => {
     if (!capturedImage || !containerRef.current || !leftPanelRef.current) return;
 
-    const totalW = containerRef.current.offsetWidth;
-    const totalH = containerRef.current.offsetHeight;
-    const topH = leftPanelRef.current.offsetHeight;
+    const OUTPUT_W = 768;
+    const OUTPUT_H = 1370;
+    const layoutH = containerRef.current.offsetHeight;
+    const layoutTopH = leftPanelRef.current.offsetHeight;
+    const topRatio = layoutH > 0 ? layoutTopH / layoutH : 0.32;
+    const totalW = OUTPUT_W;
+    const totalH = OUTPUT_H;
+    const topH = Math.round(totalH * topRatio);
     const bottomH = totalH - topH;
-    const scale = 2;
 
     const out = document.createElement("canvas");
-    out.width = totalW * scale;
-    out.height = totalH * scale;
+    out.width = totalW;
+    out.height = totalH;
 
     const ctx = out.getContext("2d");
     if (!ctx) return;
-    ctx.scale(scale, scale);
 
     const grad = ctx.createLinearGradient(0, 0, 0, topH);
     grad.addColorStop(0, "#87CEEB");
@@ -298,9 +324,7 @@ export default function KboEventBanner() {
     const handleX = (totalW - handleWidth) / 2;
     const handleY = 14;
     ctx.fillStyle = "rgba(0,0,0,0.45)";
-    ctx.beginPath();
-    ctx.roundRect(handleX, handleY, handleWidth, handleHeight, 999);
-    ctx.fill();
+    fillRoundedRect(ctx, handleX, handleY, handleWidth, handleHeight, handleHeight / 2);
     ctx.fillStyle = "#fff";
     ctx.textBaseline = "top";
     ctx.fillText(handleText, handleX + handlePaddingX, handleY + handlePaddingY);
