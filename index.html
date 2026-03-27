@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>KBO 컬러즈 만루홈런</title>
+    <script>
+      // 스와이프 업 제스처로 주소창 숨기기
+      var lastY = 0;
+      document.addEventListener('touchstart', function(e) {
+        lastY = e.touches[0].clientY;
+      }, { passive: true });
+      document.addEventListener('touchmove', function(e) {
+        var dy = lastY - e.touches[0].clientY;
+        // 위로 스와이프 시 주소창 숨김 유도 (스크롤 이벤트 허용)
+        if (dy > 0) { /* 브라우저가 자연스럽게 처리 */ }
+        lastY = e.touches[0].clientY;
+      }, { passive: true });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
