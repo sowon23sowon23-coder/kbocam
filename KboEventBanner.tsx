@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+﻿import React, { useCallback, useEffect, useRef, useState } from "react";
 
 const Heart = ({ size = 40, style }: { size?: number; style?: React.CSSProperties }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="#FF3D6E" style={style}>
@@ -82,7 +82,7 @@ export default function KboEventBanner() {
       };
       if (caps.zoom) setHwZoomRange({ min: caps.zoom.min, max: caps.zoom.max });
     } catch {
-      setCameraError("카메라 접근 권한이 필요합니다.");
+      setCameraError("移대찓???묎렐 沅뚰븳???꾩슂?⑸땲??");
     }
   }, []);
 
@@ -243,10 +243,10 @@ export default function KboEventBanner() {
     const titleSize = Math.min(38, totalW * 0.12, topH * 0.22);
     ctx.font = `900 ${titleSize}px "Noto Sans KR", "Apple SD Gothic Neo", sans-serif`;
     ctx.fillStyle = "#2D7A2D";
-    ctx.fillText("컬러즈", pad, pad + titleSize);
+    ctx.fillText("而щ윭利?, pad, pad + titleSize);
 
     const markY = pad + titleSize + 6;
-    const markWidth = ctx.measureText("만루홈런").width + 8;
+    const markWidth = ctx.measureText("留뚮（?덈윴").width + 8;
     ctx.fillStyle = "#FFE135";
     ctx.save();
     ctx.translate(pad - 3 + markWidth / 2, markY + titleSize / 2);
@@ -255,13 +255,13 @@ export default function KboEventBanner() {
     ctx.restore();
 
     ctx.fillStyle = "#1A4A1A";
-    ctx.fillText("만루홈런", pad, markY + titleSize);
+    ctx.fillText("留뚮（?덈윴", pad, markY + titleSize);
 
     const subY = markY + titleSize + 14;
     ctx.font = `600 ${Math.round(titleSize * 0.26)}px "Noto Sans KR", "Apple SD Gothic Neo", sans-serif`;
     ctx.fillStyle = "#333";
-    ctx.fillText("4주차 KBO 개막전 게더링", pad, subY);
-    ctx.fillText("삼성 vs 롯데", pad, subY + titleSize * 0.32);
+    ctx.fillText("4二쇱감 KBO 媛쒕쭑??寃뚮뜑留?, pad, subY);
+    ctx.fillText("?쇱꽦 vs 濡?뜲", pad, subY + titleSize * 0.32);
 
     try {
       const player = await loadImage("/baseball-player.png");
@@ -364,8 +364,7 @@ export default function KboEventBanner() {
               letterSpacing: "-1px",
             }}
           >
-            컬러즈
-          </div>
+            而щ윭利?          </div>
           <div style={{ position: "relative", display: "inline-block", marginTop: "4px" }}>
             <div
               style={{
@@ -390,13 +389,12 @@ export default function KboEventBanner() {
                 padding: "0 4px",
               }}
             >
-              만루홈런
+              留뚮（?덈윴
             </div>
           </div>
           <div style={{ fontSize: "9px", fontWeight: 600, color: "#333", marginTop: "8px", lineHeight: 1.6 }}>
-            4주차 KBO 개막전 게더링
-            <br />
-            삼성 vs 롯데
+            4二쇱감 KBO 媛쒕쭑??寃뚮뜑留?            <br />
+            ?쇱꽦 vs 濡?뜲
           </div>
         </div>
 
@@ -435,7 +433,7 @@ export default function KboEventBanner() {
               color: "#aaa",
             }}
           >
-            <div style={{ fontSize: "40px", marginBottom: "10px" }}>📷</div>
+            <div style={{ fontSize: "40px", marginBottom: "10px" }}>?벜</div>
             <div style={{ fontSize: "13px" }}>{cameraError}</div>
           </div>
         )}
@@ -668,13 +666,18 @@ export default function KboEventBanner() {
                 top: 14,
                 left: "50%",
                 transform: "translateX(-50%)",
-                fontSize: "28px",
-                display: "flex",
-                gap: "6px",
+                padding: "8px 14px",
+                borderRadius: "999px",
+                background: "rgba(0,0,0,0.45)",
+                backdropFilter: "blur(8px)",
+                color: "#fff",
+                fontSize: "14px",
+                fontWeight: 700,
+                letterSpacing: "0.2px",
                 zIndex: 3,
               }}
             >
-              ❤️❤️❤️
+              @colorz_gathering
             </div>
 
             <div
@@ -708,7 +711,7 @@ export default function KboEventBanner() {
                   minWidth: "140px",
                 }}
               >
-                다시 찍기
+                ?ㅼ떆 李띻린
               </button>
 
               <button
@@ -728,8 +731,7 @@ export default function KboEventBanner() {
                   minWidth: "140px",
                 }}
               >
-                저장하기
-              </button>
+                ??ν븯湲?              </button>
             </div>
           </>
         )}
