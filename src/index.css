@@ -8,6 +8,7 @@ html {
   height: 100%;
   background: #000;
   overscroll-behavior: none;
+  touch-action: manipulation;
 }
 
 body {
@@ -15,6 +16,11 @@ body {
   min-height: calc(100% + 1px);
   background: #000;
   overscroll-behavior: none;
+  overflow: hidden;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 /* 앱은 fixed로 고정 → body 스크롤과 무관하게 항상 꽉 참 */
@@ -24,4 +30,17 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img,
+svg,
+button {
+  -webkit-user-drag: none;
 }
