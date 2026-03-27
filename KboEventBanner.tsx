@@ -82,7 +82,7 @@ export default function KboEventBanner() {
       };
       if (caps.zoom) setHwZoomRange({ min: caps.zoom.min, max: caps.zoom.max });
     } catch {
-      setCameraError("移대찓???묎렐 沅뚰븳???꾩슂?⑸땲??");
+      setCameraError("카메라 접근 권한이 필요합니다.");
     }
   }, []);
 
@@ -288,6 +288,23 @@ export default function KboEventBanner() {
 
     ctx.drawImage(cam, sx, sy, sw, sh, 0, topH, totalW, bottomH);
 
+    const handleText = "@colorz_gathering";
+    const handleFontSize = Math.max(14, Math.round(totalW * 0.035));
+    ctx.font = `700 ${handleFontSize}px "Noto Sans KR", "Apple SD Gothic Neo", sans-serif`;
+    const handlePaddingX = Math.round(handleFontSize * 0.9);
+    const handlePaddingY = Math.round(handleFontSize * 0.55);
+    const handleWidth = ctx.measureText(handleText).width + handlePaddingX * 2;
+    const handleHeight = handleFontSize + handlePaddingY * 2;
+    const handleX = (totalW - handleWidth) / 2;
+    const handleY = 14;
+    ctx.fillStyle = "rgba(0,0,0,0.45)";
+    ctx.beginPath();
+    ctx.roundRect(handleX, handleY, handleWidth, handleHeight, 999);
+    ctx.fill();
+    ctx.fillStyle = "#fff";
+    ctx.textBaseline = "top";
+    ctx.fillText(handleText, handleX + handlePaddingX, handleY + handlePaddingY);
+
     const link = document.createElement("a");
     link.href = out.toDataURL("image/png");
     link.download = `colorz-kisscam-${Date.now()}.png`;
@@ -364,7 +381,8 @@ export default function KboEventBanner() {
               letterSpacing: "-1px",
             }}
           >
-            而щ윭利?          </div>
+            컬러즈
+          </div>
           <div style={{ position: "relative", display: "inline-block", marginTop: "4px" }}>
             <div
               style={{
@@ -389,12 +407,13 @@ export default function KboEventBanner() {
                 padding: "0 4px",
               }}
             >
-              留뚮（?덈윴
+              만루홈런
             </div>
           </div>
           <div style={{ fontSize: "9px", fontWeight: 600, color: "#333", marginTop: "8px", lineHeight: 1.6 }}>
-            4二쇱감 KBO 媛쒕쭑??寃뚮뜑留?            <br />
-            ?쇱꽦 vs 濡?뜲
+            4주차 KBO 개막전 게더링
+            <br />
+            삼성 vs 롯데
           </div>
         </div>
 
@@ -433,7 +452,7 @@ export default function KboEventBanner() {
               color: "#aaa",
             }}
           >
-            <div style={{ fontSize: "40px", marginBottom: "10px" }}>?벜</div>
+            <div style={{ fontSize: "40px", marginBottom: "10px" }}>📷</div>
             <div style={{ fontSize: "13px" }}>{cameraError}</div>
           </div>
         )}
@@ -711,7 +730,7 @@ export default function KboEventBanner() {
                   minWidth: "140px",
                 }}
               >
-                ?ㅼ떆 李띻린
+                다시 찍기
               </button>
 
               <button
@@ -731,7 +750,8 @@ export default function KboEventBanner() {
                   minWidth: "140px",
                 }}
               >
-                ??ν븯湲?              </button>
+                저장하기
+              </button>
             </div>
           </>
         )}
