@@ -15,6 +15,11 @@ const FlipIcon = () => (
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 5;
 const ZOOM_STEP = 0.5;
+const BANNER_TITLE_SIZE = 38;
+const HANDLE_TOP = 14;
+const HANDLE_FONT_SIZE = 14;
+const HANDLE_PADDING_X = 14;
+const HANDLE_PADDING_Y = 8;
 
 const loadImage = (src: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
@@ -263,7 +268,7 @@ export default function KboEventBanner() {
 
     await document.fonts.ready;
     const pad = 14;
-    const titleSize = Math.min(38, totalW * 0.12, topH * 0.22);
+    const titleSize = BANNER_TITLE_SIZE;
     ctx.font = `900 ${titleSize}px "Noto Sans KR", "Apple SD Gothic Neo", sans-serif`;
     ctx.fillStyle = "#2D7A2D";
     ctx.fillText("컬러즈", pad, pad + titleSize);
@@ -312,14 +317,14 @@ export default function KboEventBanner() {
     ctx.drawImage(cam, sx, sy, sw, sh, 0, topH, totalW, bottomH);
 
     const handleText = "@colorz_gathering";
-    const handleFontSize = Math.max(14, Math.round(totalW * 0.035));
+    const handleFontSize = HANDLE_FONT_SIZE;
     ctx.font = `700 ${handleFontSize}px "Noto Sans KR", "Apple SD Gothic Neo", sans-serif`;
-    const handlePaddingX = Math.round(handleFontSize * 0.9);
-    const handlePaddingY = Math.round(handleFontSize * 0.55);
+    const handlePaddingX = HANDLE_PADDING_X;
+    const handlePaddingY = HANDLE_PADDING_Y;
     const handleWidth = ctx.measureText(handleText).width + handlePaddingX * 2;
     const handleHeight = handleFontSize + handlePaddingY * 2;
     const handleX = (totalW - handleWidth) / 2;
-    const handleY = 14;
+    const handleY = HANDLE_TOP;
     ctx.fillStyle = "rgba(0,0,0,0.45)";
     fillRoundedRect(ctx, handleX, handleY, handleWidth, handleHeight, handleHeight / 2);
     ctx.fillStyle = "#fff";
@@ -395,7 +400,7 @@ export default function KboEventBanner() {
         <div style={{ padding: "14px 12px 0", zIndex: 2, position: "relative" }}>
           <div
             style={{
-              fontSize: "clamp(24px, 5.5vw, 38px)",
+              fontSize: `${BANNER_TITLE_SIZE}px`,
               fontWeight: 900,
               color: "#2D7A2D",
               lineHeight: 1,
@@ -419,7 +424,7 @@ export default function KboEventBanner() {
             />
             <div
               style={{
-                fontSize: "clamp(24px, 5.5vw, 38px)",
+                fontSize: `${BANNER_TITLE_SIZE}px`,
                 fontWeight: 900,
                 color: "#1A4A1A",
                 lineHeight: 1,
@@ -703,15 +708,15 @@ export default function KboEventBanner() {
             <div
               style={{
                 position: "absolute",
-                top: 14,
+                top: HANDLE_TOP,
                 left: "50%",
                 transform: "translateX(-50%)",
-                padding: "8px 14px",
+                padding: `${HANDLE_PADDING_Y}px ${HANDLE_PADDING_X}px`,
                 borderRadius: "999px",
                 background: "rgba(0,0,0,0.45)",
                 backdropFilter: "blur(8px)",
                 color: "#fff",
-                fontSize: "14px",
+                fontSize: `${HANDLE_FONT_SIZE}px`,
                 fontWeight: 700,
                 letterSpacing: "0.2px",
                 zIndex: 3,
