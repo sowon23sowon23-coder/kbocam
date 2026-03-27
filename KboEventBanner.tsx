@@ -418,7 +418,7 @@ export default function KboEventBanner() {
           position: "relative",
           overflow: "hidden",
           background: "#000",
-          boxShadow: "inset 0 0 0 10px #87CEEB",
+          boxShadow: "inset 0 0 0 10px #2563EB",
         }}
       >
         {cameraError && (
