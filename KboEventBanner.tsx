@@ -243,10 +243,10 @@ export default function KboEventBanner() {
     const titleSize = Math.min(38, totalW * 0.12, topH * 0.22);
     ctx.font = `900 ${titleSize}px "Noto Sans KR", "Apple SD Gothic Neo", sans-serif`;
     ctx.fillStyle = "#2D7A2D";
-    ctx.fillText("而щ윭利?, pad, pad + titleSize);
+    ctx.fillText("컬러즈", pad, pad + titleSize);
 
     const markY = pad + titleSize + 6;
-    const markWidth = ctx.measureText("留뚮（?덈윴").width + 8;
+    const markWidth = ctx.measureText("만루홈런").width + 8;
     ctx.fillStyle = "#FFE135";
     ctx.save();
     ctx.translate(pad - 3 + markWidth / 2, markY + titleSize / 2);
@@ -255,13 +255,13 @@ export default function KboEventBanner() {
     ctx.restore();
 
     ctx.fillStyle = "#1A4A1A";
-    ctx.fillText("留뚮（?덈윴", pad, markY + titleSize);
+    ctx.fillText("만루홈런", pad, markY + titleSize);
 
     const subY = markY + titleSize + 14;
     ctx.font = `600 ${Math.round(titleSize * 0.26)}px "Noto Sans KR", "Apple SD Gothic Neo", sans-serif`;
     ctx.fillStyle = "#333";
-    ctx.fillText("4二쇱감 KBO 媛쒕쭑??寃뚮뜑留?, pad, subY);
-    ctx.fillText("?쇱꽦 vs 濡?뜲", pad, subY + titleSize * 0.32);
+    ctx.fillText("4주차 KBO 개막전 게더링", pad, subY);
+    ctx.fillText("삼성 vs 롯데", pad, subY + titleSize * 0.32);
 
     try {
       const player = await loadImage("/baseball-player.png");
