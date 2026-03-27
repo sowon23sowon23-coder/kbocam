@@ -242,12 +242,9 @@ export default function KboEventBanner() {
 
     const OUTPUT_W = 768;
     const OUTPUT_H = 1370;
-    const layoutH = containerRef.current.offsetHeight;
-    const layoutTopH = leftPanelRef.current.offsetHeight;
-    const topRatio = layoutH > 0 ? layoutTopH / layoutH : 0.32;
     const totalW = OUTPUT_W;
     const totalH = OUTPUT_H;
-    const topH = Math.round(totalH * topRatio);
+    const topH = 440;
     const bottomH = totalH - topH;
 
     const out = document.createElement("canvas");
