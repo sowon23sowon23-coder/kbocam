@@ -289,11 +289,11 @@ export default function KboEventBanner() {
     ctx.fillStyle = "#1A4A1A";
     ctx.fillText("만루홈런", padX, markY + headlineSize);
 
-    const subY = markY + headlineSize + 14;
+    const subY = markY + headlineSize + 28;
     ctx.font = `700 ${subtitleSize}px "Noto Sans KR", "Apple SD Gothic Neo", sans-serif`;
     ctx.fillStyle = "#333";
     ctx.fillText("4주차 KBO 개막전 게더링", padX, subY);
-    ctx.fillText("삼성 vs 롯데", padX, subY + 28);
+    ctx.fillText("삼성 vs 롯데", padX, subY + 24);
 
     try {
       const player = await loadImage("/baseball-player.png");
