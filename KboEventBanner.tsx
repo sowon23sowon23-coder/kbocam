@@ -267,35 +267,39 @@ export default function KboEventBanner() {
     ctx.fillRect(0, 0, totalW, topH);
 
     await document.fonts.ready;
-    const pad = 14;
-    const titleSize = BANNER_TITLE_SIZE;
+    const padX = 18;
+    const padTop = 22;
+    const titleSize = 76;
+    const headlineSize = 86;
+    const subtitleSize = 18;
     ctx.font = `900 ${titleSize}px "Noto Sans KR", "Apple SD Gothic Neo", sans-serif`;
     ctx.fillStyle = "#2D7A2D";
-    ctx.fillText("컬러즈", pad, pad + titleSize);
+    ctx.fillText("컬러즈", padX, padTop + titleSize);
 
-    const markY = pad + titleSize + 6;
-    const markWidth = ctx.measureText("만루홈런").width + 8;
+    const markY = padTop + titleSize + 12;
+    ctx.font = `900 ${headlineSize}px "Noto Sans KR", "Apple SD Gothic Neo", sans-serif`;
+    const markWidth = ctx.measureText("만루홈런").width + 24;
     ctx.fillStyle = "#FFE135";
     ctx.save();
-    ctx.translate(pad - 3 + markWidth / 2, markY + titleSize / 2);
+    ctx.translate(padX - 6 + markWidth / 2, markY + headlineSize / 2);
     ctx.rotate(-0.017);
-    ctx.fillRect(-markWidth / 2 - 2, -titleSize / 2 + 3, markWidth + 4, titleSize - 3);
+    ctx.fillRect(-markWidth / 2 - 4, -headlineSize / 2 + 8, markWidth + 8, headlineSize - 10);
     ctx.restore();
 
     ctx.fillStyle = "#1A4A1A";
-    ctx.fillText("만루홈런", pad, markY + titleSize);
+    ctx.fillText("만루홈런", padX, markY + headlineSize);
 
-    const subY = markY + titleSize + 14;
-    ctx.font = `600 ${Math.round(titleSize * 0.26)}px "Noto Sans KR", "Apple SD Gothic Neo", sans-serif`;
+    const subY = markY + headlineSize + 14;
+    ctx.font = `700 ${subtitleSize}px "Noto Sans KR", "Apple SD Gothic Neo", sans-serif`;
     ctx.fillStyle = "#333";
-    ctx.fillText("4주차 KBO 개막전 게더링", pad, subY);
-    ctx.fillText("삼성 vs 롯데", pad, subY + titleSize * 0.32);
+    ctx.fillText("4주차 KBO 개막전 게더링", padX, subY);
+    ctx.fillText("삼성 vs 롯데", padX, subY + 28);
 
     try {
       const player = await loadImage("/baseball-player.png");
-      const imageH = Math.min(topH * 0.72, totalW * 0.52);
+      const imageH = Math.min(topH * 0.82, totalW * 0.62);
       const imageW = (player.width / player.height) * imageH;
-      ctx.drawImage(player, totalW - imageW - pad, topH - imageH, imageW, imageH);
+      ctx.drawImage(player, totalW - imageW + 18, topH - imageH + 10, imageW, imageH);
     } catch {}
 
     const cam = await loadImage(capturedImage);
